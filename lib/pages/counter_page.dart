@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2ff6a02 ( pertemuan 2)
 import 'package:flutter/material.dart';
 
 class CounterPage extends StatefulWidget {
@@ -11,6 +15,14 @@ class _CounterPageState extends State<CounterPage> {
   int count = 0;
 
   void tambah() => setState(() => count++);
+<<<<<<< HEAD
+=======
+  void kurang() {
+  if (count > 0) {
+    setState(() => count--);
+    }
+  }
+>>>>>>> 2ff6a02 ( pertemuan 2)
   void reset() => setState(() => count = 0);
 
   @override
@@ -33,6 +45,11 @@ class _CounterPageState extends State<CounterPage> {
               children: [
                 ElevatedButton(onPressed: tambah, child: const Text('Tambah')),
                 const SizedBox(width: 12),
+<<<<<<< HEAD
+=======
+                ElevatedButton(onPressed: kurang, child: const Text('Kurang')),
+                const SizedBox(width: 12),
+>>>>>>> 2ff6a02 ( pertemuan 2)
                 OutlinedButton(onPressed: reset, child: const Text('Reset')),
               ],
             ),
