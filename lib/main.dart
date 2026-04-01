@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pages/counter_page.dart';
-import 'pages/info_page.dart';
 import 'pages/rpg_page.dart';
 
 void main() {
@@ -36,30 +34,6 @@ class HomeMenuPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              child: const Text('Counter Page'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CounterPage(),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              child: const Text('Info Page'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const InfoPage(),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
             ElevatedButton(
               child: const Text('RPG Page'),
               onPressed: () {

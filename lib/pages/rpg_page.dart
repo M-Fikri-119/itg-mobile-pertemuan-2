@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/hero.dart';
+import '../models/player.dart';
 import '../extensions/string_extensions.dart';
 import '../services/shop_service.dart';
 
@@ -11,14 +11,14 @@ class RPGPage extends StatefulWidget {
 }
 
 class _RPGPageState extends State<RPGPage> {
-  late Hero hero;
+  late Player player;
   String monsterName = 'goblin king';
   List<String> shopItems = [];
 
   @override
   void initState() {
     super.initState();
-    hero = const Hero(
+    player = const Player(
       name: 'Hero',
       hp: 100,
       inventory: {'Sword': 1, 'Potion': 5},
@@ -35,7 +35,7 @@ class _RPGPageState extends State<RPGPage> {
 
   void _heal() {
     setState(() {
-      hero = hero.heal(10);
+      player = player.heal(10);
     });
   }
 
@@ -46,7 +46,7 @@ class _RPGPageState extends State<RPGPage> {
         title: const Text('Inventory'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
-          children: hero.inventory.entries.map((entry) {
+          children: player.inventory.entries.map((entry) {
             return Text('${entry.key}: ${entry.value}');
           }).toList(),
         ),
@@ -69,8 +69,8 @@ class _RPGPageState extends State<RPGPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Hero: ${hero.name}', style: const TextStyle(fontSize: 20)),
-            Text('HP: ${hero.hp}', style: const TextStyle(fontSize: 18)),
+            Text('Hero: ${player.name}', style: const TextStyle(fontSize: 20)),
+            Text('HP: ${player.hp}', style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 20),
             Text('Monster: ${monsterName.toTitleCase()}', style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 20),
