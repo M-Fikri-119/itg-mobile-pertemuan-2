@@ -1,180 +1,150 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'pages/info_page.dart';
 import 'pages/counter_page.dart';
-
-void main() => runApp(const MyApp());
-=======
+import 'pages/info_page.dart';
+import 'pages/rpg_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
->>>>>>> 2ff6a02 ( pertemuan 2)
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-<<<<<<< HEAD
-  static const String routeInfo = '/info';
-  static const String routeCounter = '/counter';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Navigation Demo',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
-
-      // halaman utama yang ditampilkan saat aplikasi dijalankan
-      initialRoute: '/',
-      // daftar rute yang tersedia dalam aplikasi
-      routes: {
-        '/': (context) => const HomeMenuPage(),
-        routeInfo: (context) => const InfoPage(),
-        routeCounter: (context) => const CounterPage(),
-      },
-=======
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pertemuan 2',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
->>>>>>> 2ff6a02 ( pertemuan 2)
+      home: const HomeMenuPage(),
     );
   }
 }
 
-<<<<<<< HEAD
 class HomeMenuPage extends StatelessWidget {
   const HomeMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Menu')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      appBar: AppBar(
+        title: const Text('Home Menu'),
+      ),
+      body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
+              child: const Text('Counter Page'),
               onPressed: () {
-                Navigator.pushNamed(context, MyApp.routeInfo);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CounterPage(),
+                  ),
+                );
               },
-              child: const Text('Buka Stateless Page'),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 20),
             ElevatedButton(
+              child: const Text('Info Page'),
               onPressed: () {
-                Navigator.pushNamed(context, MyApp.routeCounter);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const InfoPage(),
+                  ),
+                );
               },
-              child: const Text('Buka Stateful Page'),
-=======
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              child: const Text('RPG Page'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RPGPage(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key});
 
-  void _incrementCounter() {
+  @override
+  State<CounterPage> createState() => _CounterPageState();
+}
+
+class _CounterPageState extends State<CounterPage> {
+  int counter = 0;
+
+  void increment() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      counter++;
+    });
+  }
+
+  void decrement() {
+    setState(() {
+      counter--;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('Counter Page'),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You have pushed the button this many times:'),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
->>>>>>> 2ff6a02 ( pertemuan 2)
+              '$counter',
+              style: const TextStyle(fontSize: 40),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: increment,
+              child: const Text('Tambah'),
+            ),
+            ElevatedButton(
+              onPressed: decrement,
+              child: const Text('Kurang'),
             ),
           ],
         ),
       ),
-<<<<<<< HEAD
-=======
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class InfoPage extends StatelessWidget {
+  const InfoPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Info Page'),
       ),
->>>>>>> 2ff6a02 ( pertemuan 2)
+      body: const Center(
+        child: Text(
+          'Ini halaman info',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
     );
   }
 }

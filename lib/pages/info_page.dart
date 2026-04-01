@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class InfoPage extends StatelessWidget {
@@ -18,11 +19,7 @@ class InfoPage extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-<<<<<<< HEAD
-              'Halaman ini tidak menyimpan state yang berubah.',
-=======
-              '2306119 - M Fikri Akmaludin',
->>>>>>> 2ff6a02 ( pertemuan 2)
+              '2306119 - M FIKRI AKMALUDIN',
               style: TextStyle(fontSize: 16),
             ),
           ],
