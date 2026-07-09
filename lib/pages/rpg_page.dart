@@ -14,6 +14,7 @@ class _RPGPageState extends State<RPGPage> {
   late Player player;
   String monsterName = 'goblin king';
   List<String> shopItems = [];
+  String lootPreview = 'No loot yet';
 
   @override
   void initState() {
@@ -26,8 +27,9 @@ class _RPGPageState extends State<RPGPage> {
     _fetchShopItems();
   }
 
-  void _fetchShopItems() async {
+  Future<void> _fetchShopItems() async {
     final items = await fetchShopItems();
+    if (!mounted) return;
     setState(() {
       shopItems = items;
     });
@@ -44,11 +46,24 @@ class _RPGPageState extends State<RPGPage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Inventory'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: player.inventory.entries.map((entry) {
-            return Text('${entry.key}: ${entry.value}');
-          }).toList(),
+        content: SizedBox(
+          width: 240,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: player.inventory.entries.map((entry) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(entry.key),
+                    Text('x${entry.value}'),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
         ),
         actions: [
           TextButton(
@@ -58,6 +73,14 @@ class _RPGPageState extends State<RPGPage> {
         ],
       ),
     );
+  }
+
+  void _showLootDemo() {
+    final lootOptions = ['Gold Coin', 'Health Potion', 'Rare Gem', 'Dragon Scale'];
+    final randomLoot = lootOptions[(DateTime.now().millisecondsSinceEpoch % lootOptions.length)];
+    setState(() {
+      lootPreview = randomLoot;
+    });
   }
 
   @override
@@ -74,19 +97,26 @@ class _RPGPageState extends State<RPGPage> {
             const SizedBox(height: 20),
             Text('Monster: ${monsterName.toTitleCase()}', style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 20),
-            Row(
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
               children: [
                 ElevatedButton(
                   onPressed: _heal,
                   child: const Text('Heal (+10 HP)'),
                 ),
-                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: _showInventory,
                   child: const Text('Inventory'),
                 ),
+                ElevatedButton(
+                  onPressed: _showLootDemo,
+                  child: const Text('Random Loot'),
+                ),
               ],
             ),
+            const SizedBox(height: 20),
+            Text('Loot Demo: $lootPreview', style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 20),
             const Text('Shop Items:', style: TextStyle(fontSize: 18)),
             Expanded(
